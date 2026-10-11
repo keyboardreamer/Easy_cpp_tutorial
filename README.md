@@ -1,331 +1,94 @@
-# C++ Beginner Introduction
+C++ Beginner Introduction
+A beginner-friendly introduction to the basic concepts covered in tutorial.cpp.
 
-> A beginner-friendly introduction to the basic concepts of C++.
-
----
-
-## 0. Basic Structure of a C++ Program
-
+0. Basic Structure of a C++ Program
 A basic C++ program usually looks like this:
-
-```cpp
 #include <iostream>
+#include <fstream>
+#include <vector>
+#include <string>
 using namespace std;
 
 int main()
 {
     // Your code goes here
-
     return 0;
 }
-```
+What do these lines mean?
+- #include <iostream> provides console input and output with cin and cout.
+- #include <fstream> provides file streams for reading and writing files.
+- #include <vector> provides the vector container.
+- #include <string> provides string.
+- using namespace std; lets you write cout, cin, string, vector, and other standard-library names without prefixing them with std::.
+IMPORTANT: Most statements end with ;. Some lines, such as if, for, and function declarations, introduce a block and do not end with a semicolon at that point.
 
-### What do these lines mean?
-
-```cpp
-#include <iostream>
-```
-
-This allows us to use input and output features such as `cin` and `cout`.
-
-```cpp
-using namespace std;
-```
-
-This allows us to write:
-
-```cpp
-cout
-cin
-string
-```
-
-instead of:
-
-```cpp
-std::cout
-std::cin
-std::string
-```
-
-> **IMPORTANT:** Remember to put `;` at the end of most statements.
-
----
-
-# 1. Output
-
-We can use `cout` to output something to the console.
-
-```cpp
+1. Output
+We can use cout to output something to the console.
 cout << "hello world";
-```
-
 You can output variables as well:
-
-```cpp
 int age = 18;
-
 cout << age;
-```
-
-## Multiple outputs
-
-You can connect multiple outputs using `<<`.
-
-```cpp
-cout << "My age is " << age;
-```
-
-For example:
-
-```cpp
-int age = 18;
-string name = "John";
-
-cout << "My name is " << name << " and I am " << age << " years old.";
-```
-
-## Changing lines
-
-Use `endl` to move to a new line.
-
-```cpp
+Multiple outputs and new lines
+Connect multiple outputs using <<.
+cout << "My age is " << age << endl;
 cout << "Hello" << endl;
 cout << "World";
-```
+endl moves output to a new line. It also flushes the output stream.
+2. Data Types and Variables
+A variable stores a value. The code introduces these types:
+Data type	Meaning	Example
+int	Integer	20
+double	Decimal / floating-point number	3.14
+char	A single character	'A'
+string	A sequence of characters	"hello123"
+bool	true or false	true
 
-Output:
 
-```text
-Hello
-World
-```
-
----
-
-# 2. Data Types and Variables
-
-A **variable** is a container used to store a value.
-
-Some basic C++ data types are:
-
-| Data type | Meaning                  | Example   |
-| --------- | ------------------------ | --------- |
-| `int`     | Integer                  | `20`      |
-| `double`  | Decimal number           | `3.14159` |
-| `char`    | A single character       | `'A'`     |
-| `string`  | A sequence of characters | `"Hello"` |
-| `bool`    | True or false            | `true`    |
-
-## Declaring a variable
-
-The basic syntax is:
-
-```cpp
+Declaring a variable
 type variableName = value;
-```
-
-For example:
-
-```cpp
+Examples from the code:
 int newVariable = 20;
-string newVariable2 = "hello";
-```
-
----
-
-## Changing variable values
-
-The value of a variable can be changed after it has been declared.
-
-```cpp
-int newVariable = 20;
-
+string newVariable2 = "hello123";
+Changing a variable's value
 newVariable = 21;
 newVariable = 60 * 5;
 newVariable = newVariable + 1;
-```
-
-Similarly:
-
-```cpp
-string newVariable2 = "hello";
-
+newVariable += 1;
+newVariable += 1; is shorthand for adding 1 to the current value. The same pattern works with other arithmetic operators, such as -=, *=, and /=.
+A string variable can also be reassigned:
 newVariable2 = "no hello";
-```
-
-The variable keeps its name, while its stored value changes.
-
----
-
-# 3. Naming Conventions
-
-Good variable names make your code much easier to understand.
-
-### Recommended rules
-
-Use names that describe what the variable stores:
-
-```cpp
-int age;
-double temperature;
-string studentName;
-```
-
-Avoid meaningless names such as:
-
-```cpp
-int x;
-int a;
-int abc;
-```
-
-unless the variable is being used for something very simple, such as a loop counter.
-
-### camelCase
-
-A common convention in C++ is **camelCase**:
-
-```cpp
-int studentAge;
-double examScore;
-string firstName;
-```
-
-The first word starts with a lowercase letter, while subsequent words start with uppercase letters.
-
-### Constants
-
-Constants are values that should not change.
-
-A common convention is to use `UPPER_CASE`:
-
-```cpp
-const double PI = 3.141592653589793;
-const int MAX_SCORE = 100;
-```
-
-### Important
-
-Variable names should:
-
-* Describe the purpose of the variable
-* Avoid unnecessary abbreviations
-* Be consistent throughout your program
-* Not contain spaces
-
-For example:
-
-```cpp
-int studentAge;
-```
-
-is much clearer than:
-
-```cpp
-int sa;
-```
-
----
-
-# 4. Input
-
-We can use `cin` to receive input from the user.
-
-> **BE CAREFUL:** `cin` uses `>>`, while `cout` uses `<<`.
-
-First, create a variable to store the input:
-
-```cpp
+3. Input
+Use cin to receive input from the user. cin uses >>, while cout uses <<.
 int inputVal = 0;
-```
-
-Then:
-
-```cpp
 cin >> inputVal;
-```
-
-We can print the value afterwards:
-
-```cpp
 cout << inputVal;
-```
-
 A complete example:
-
-```cpp
 #include <iostream>
 using namespace std;
 
 int main()
 {
     int inputVal = 0;
-
     cin >> inputVal;
-
     cout << inputVal;
-
     return 0;
 }
-```
+If the user enters 25, the program outputs 25.
+4. Comparisons and if-else
+Comparison operators used in the code:
+Operator	Meaning
+==	Equal to
+!=	Not equal to
+<	Less than
+>	Greater than
+<=	Less than or equal to
+>=	Greater than or equal to
 
-If the user enters:
 
-```text
-25
-```
-
-the program outputs:
-
-```text
-25
-```
-
----
-
-# 5. Comparisons and `if-else`
-
-C++ provides several comparison operators.
-
-| Operator | Meaning                  |
-| -------- | ------------------------ |
-| `==`     | Equal to                 |
-| `!=`     | Not equal to             |
-| `<`      | Less than                |
-| `>`      | Greater than             |
-| `<=`     | Less than or equal to    |
-| `>=`     | Greater than or equal to |
-
-> **IMPORTANT:** `==` means comparison.
-> `=` means assignment.
+IMPORTANT: == compares two values. = assigns a value to a variable.
 
 For example:
-
-```cpp
-int test = 68;
-
-cout << (test == 68);
-```
-
-The result is:
-
-```text
-1
-```
-
-because `test` is equal to `68`.
-
-In C++, `true` is normally represented by `1`, while `false` is represented by `0` when printed as an integer.
-
----
-
-## `if-else`
-
-We can use comparisons with `if`, `else if`, and `else`.
-
-```cpp
-int test = 68;
+int test = 67;
 
 if (test == 67)
 {
@@ -335,236 +98,81 @@ else if (test == 68)
 {
     cout << "test is 68";
 }
+else if (test == 69)
+{
+    cout << "test is 69";
+}
+else if (test == 70)
+{
+    cout << "test is 70";
+}
 else
 {
-    cout << "test is not 67 or 68";
+    cout << "test is not 67, 68, 69, or 70";
 }
-```
-
-The program checks the conditions from top to bottom.
-
-Once one condition is true, its corresponding block is executed.
-
----
-
-# 6. Strings
-
-A `string` stores a sequence of characters.
-
-```cpp
-string testString = "SunShengZhe5Nv1";
-```
-
----
-
-## 6.1 Concatenation
-
-You can combine two strings using `+`.
-
-```cpp
+The conditions are checked from top to bottom. Once a condition is true, its block runs and the remaining branches are skipped.
+A comparison produces a Boolean result. When a Boolean is printed with the default stream settings, true normally appears as 1 and false as 0.
+5. Strings
+A string stores a sequence of characters.
+string testString = "banana";
+5.1 Concatenation
+Use + to join strings.
 testString = testString + " yes";
-
 cout << testString;
-```
-
-You can also directly combine strings:
-
-```cpp
-string firstName = "John";
-string lastName = "Smith";
-
-string fullName = firstName + " " + lastName;
-
-cout << fullName;
-```
-
-Output:
-
-```text
-John Smith
-```
-
----
-
-## 6.2 String Length
-
-Use `.length()` to find the number of characters in a string.
-
-```cpp
-cout << testString.length();
-```
-
-For example:
-
-```cpp
+5.2 String length
+Use .length() to get the number of characters.
 string word = "Hello";
-
 cout << word.length();
-```
-
 Output:
-
-```text
 5
-```
-
----
-
-## 6.3 Accessing Individual Characters
-
-You can access a character using:
-
-```cpp
-stringName[index]
-```
-
-For example:
-
-```cpp
-string testString = "Hello";
-
-cout << testString[0];
-```
-
+5.3 Accessing individual characters
+Use an index:
+string testString = "banana";
+cout << testString[3];
 Output:
-
-```text
-H
-```
-
-### IMPORTANT
-
-String indexing starts from **0**.
-
-For:
-
-```text
-H e l l o
-0 1 2 3 4
-```
-
-Therefore:
-
-```cpp
-testString[0]  // H
-testString[1]  // e
-testString[2]  // l
-testString[4]  // o
-```
-
-The last character is at:
-
-```text
-length - 1
-```
-
----
-
-## 6.4 Substrings
-
-You can extract part of a string using:
-
-```cpp
-string.substr(startingPosition, length)
-```
-
-For example:
-
-```cpp
-string testString = "Hello World";
-
-cout << testString.substr(1, 3);
-```
-
+a
+String indexing starts at 0. For "banana", the indexes are 0 through 5. The last character is at index length - 1.
+5.4 Substrings
+Use substr(startingPosition, length):
+string testString = "banana";
+cout << testString.substr(2, 4);
 Output:
-
-```text
-ell
-```
-
-The first number tells C++ where to start.
-
-The second number tells C++ how many characters to take.
-
----
-
-# 7. `for` Loops
-
-A `for` loop is used to repeat code.
-
-Basic structure:
-
-```cpp
+nana
+The first argument is the starting index, and the second argument is the number of characters to take.
+6. Characters and ASCII
+The code introduces char and the relationship between characters and ASCII codes.
+ASCII assigns numeric codes to common characters. For example:
+cout << char(65);
+Output:
+A
+You can convert a character to its integer code:
+cout << int('A');
+Output:
+65
+A char can also be incremented:
+char incChar = 'A';
+cout << ++incChar;
+Output:
+B
+++incChar increments the character value before it is output. ASCII is a character encoding standard; the familiar ASCII range is 0 to 127.
+7. for Loops
+A for loop repeats a block of code.
 for (initialisation; condition; update)
 {
     // code to repeat
 }
-```
-
-For example:
-
-```cpp
+Example based on the code:
 for (int i = 0; i < 20; i++)
 {
     cout << i << endl;
 }
-```
-
-This prints:
-
-```text
-0
-1
-2
-3
-...
-19
-```
-
-### Understanding the loop
-
-```cpp
-for (int i = 0; i < 20; i++)
-```
-
-There are three parts:
-
-```text
-int i = 0
-```
-
-Starting value.
-
-```text
-i < 20
-```
-
-Condition for continuing the loop.
-
-```text
-i++
-```
-
-Increase `i` by 1 after each iteration.
-
----
-
-# 8. `while` Loops
-
-A `while` loop repeats code **while a condition is true**.
-
-Basic structure:
-
-```cpp
-while (condition)
-{
-    // code to repeat
-}
-```
-
-For example:
-
-```cpp
+This prints the integers from 0 through 19.
+The three parts are:
+- int i = 0: initialisation, performed once.
+- i < 20: condition checked before each iteration.
+- i++: increment i after each iteration.
+8. while Loops
+A while loop repeats its block as long as its condition is true.
 int j = 0;
 
 while (j < 5)
@@ -572,234 +180,60 @@ while (j < 5)
     cout << j << endl;
     j++;
 }
-```
+This prints 0 through 4.
+In the uploaded code, the example is while (j < 0) with j starting at 0, so the body runs zero times. The condition is false immediately.
+IMPORTANT: Ensure that the loop can eventually stop. If the condition stays true forever, the program can enter an infinite loop.
 
-Output:
-
-```text
-0
-1
-2
-3
-4
-```
-
-The loop stops when:
-
-```text
-j < 5
-```
-
-becomes false.
-
-### IMPORTANT
-
-Make sure something inside the loop eventually changes the condition.
-
-For example:
-
-```cpp
-int j = 0;
-
-while (j < 5)
-{
-    j++;
-}
-```
-
-If you forget `j++`, the condition will always remain true and you can create an **infinite loop**.
-
----
-
-# 9. Arrays
-
-An array allows you to store multiple values of the **same data type**.
-
-For example:
-
-```cpp
+9. Arrays
+An array stores multiple elements of the same type. Its size is fixed when declared.
 string cars[4];
-```
-
-This creates an array that can store 4 strings.
-
----
-
-## 9.1 Assigning Values
-
-You can assign values to individual elements:
-
-```cpp
+This creates space for four strings.
+9.1 Assigning and accessing values
 cars[0] = "car";
 cars[1] = "carrr";
 cars[2] = "carrrrrr";
 cars[3] = "carrrrrrrr";
-```
 
-You can access an element using its index:
-
-```cpp
 cout << cars[2];
-```
-
 Output:
-
-```text
 carrrrrr
-```
-
----
-
-## IMPORTANT: Array Indexing Starts at 0
-
-If an array has 4 elements:
-
-```cpp
-string cars[4];
-```
-
-the indexes are:
-
-```text
-Index:  0      1       2       3
-       ┌──────┬───────┬───────┬───────┐
-       │ car  │ carrr │ ...   │ ...   │
-       └──────┴───────┴───────┴───────┘
-```
-
-There is **no** `cars[4]`.
-
-The valid indexes are:
-
-```text
-0, 1, 2, 3
-```
-
-In general:
-
-```text
-last index = array size - 1
-```
-
----
-
-## 9.2 Initialising an Array Directly
-
-You can also initialise an array when declaring it:
-
-```cpp
+In the original code, cars[3] is not assigned before use. Assign a value before relying on that element.
+Array indexing starts at 0
+For string cars[4], valid indexes are 0, 1, 2, and 3. There is no valid cars[4].
+The last valid index is:
+array size - 1
+9.2 Initialising an array directly
 string car_in_another_way[] = {
     "car",
     "carrr",
     "carrrr",
     "carrrr"
 };
-```
-
-C++ automatically determines the size of the array.
-
----
-
-## 9.3 Changing Array Values
-
-Array values can be changed after declaration:
-
-```cpp
+The compiler determines the number of elements from the initialiser.
+9.3 Character arrays
+The code demonstrates three ways to initialise character arrays:
+char charA[10] = {'B', 'e', 'i', 'J', 'i', 'n', 'g'};
+char charB[10] = "BeiJing";
+char charC[10] = {"BeiJing"};
+These are character arrays with space for 10 char elements. When a character array is initialised from a string literal, space is needed for the terminating null character '\0' as well as the visible characters.
+9.4 Changing an array value
 cars[0] = "carr";
-
 cout << cars[0];
-```
-
-Output:
-
-```text
-carr
-```
-
----
-
-# 10. Finding the Size of an Array
-
-You can use `sizeof()` to find the amount of memory used by an array.
-
-For example:
-
-```cpp
+Array elements can be changed after declaration.
+10. Finding the Size of an Array
+For a built-in array, sizeof() gives the number of bytes occupied by the object.
 string cars[4];
-
-cout << sizeof(cars);
-```
-
-However, `sizeof()` returns the size in **bytes**.
-
-Therefore, to find the number of elements:
-
-```cpp
 cout << sizeof(cars) / sizeof(cars[0]);
-```
+For a built-in array, this division gives the number of elements because the total array size is divided by the size of one element.
+Correction to the code comment: sizeof() reports bytes, not bits.
 
-### Why does this work?
-
-Suppose:
-
-```cpp
-string cars[4];
-```
-
-Then:
-
-```cpp
-sizeof(cars)
-```
-
-gives the total memory used by the entire array.
-
-And:
-
-```cpp
-sizeof(cars[0])
-```
-
-gives the memory used by one element.
-
-Therefore:
-
-```cpp
-sizeof(cars) / sizeof(cars[0])
-```
-
-gives:
-
-```text
-total memory / memory per element
-= number of elements
-```
-
----
-
-# 11. Multidimensional Arrays
-
-An array can have multiple dimensions.
-
-For example:
-
-```cpp
+This technique applies to built-in arrays in the scope where the array type and size are known. It does not work the same way for a vector or a pointer.
+11. Multidimensional Arrays
+An array can have more than one dimension.
 string letters[2][4];
-```
-
-This creates a 2 × 4 array.
-
-You can access an individual element using two indexes:
-
-```cpp
 letters[0][1] = "hi";
-
 cout << letters[0][1];
-```
-
-The structure can be visualised as:
-
-```text
+This creates a 2-row by 4-column array. Both indexes start at 0.
         Column
         0    1    2    3
       ┌────┬────┬────┬────┐
@@ -807,45 +241,182 @@ Row 0 │    │ hi │    │    │
       ├────┼────┼────┼────┤
 Row 1 │    │    │    │    │
       └────┴────┴────┴────┘
-```
+12. Functions
+A function groups code that can be called when needed. It may take inputs called parameters and may return a value.
+Functions in the uploaded code are declared before main().
+12.1 A void function
+void returnUserName(string userName)
+{
+    cout << "the user is " << userName;
+}
+- void means the function does not return a value.
+- string userName is a parameter.
+- Calling returnUserName("theUser101"); prints the user is theUser101.
+12.2 A function that returns bool
+bool isOdd(int Value)
+{
+    return (Value % 2 == 1);
+}
+The % operator gives the remainder after division. For non-negative integers, Value % 2 == 1 is true when the number is odd.
+Example:
+cout << isOdd(22);
+Output:
+0
+The function returns a Boolean value, which is printed as 0 or 1 by default.
+12.3 A function that returns an integer
+int Squared(int Value)
+{
+    return (Value * Value);
+}
+Example:
+cout << Squared(22);
+Output:
+484
+12.4 A function that returns a string
+string First3Letter(string userName)
+{
+    return userName.substr(0, 3);
+}
+Example:
+cout << First3Letter("testName");
+Output:
+tes
+The function returns the first three characters when the input contains at least three characters.
+12.5 Calling a function
+A function definition explains what it does. A function call runs it.
+returnUserName("theUser101");
+cout << isOdd(22) << endl;
+cout << Squared(22) << endl;
+cout << First3Letter("testName") << endl;
+13. Local and Global Variables
+A local variable is declared inside a function or block and is only accessible within its scope.
+For example, the variable i declared in this loop is only available inside the loop:
+for (int i = 0; i < 2; i++)
+{
+    cout << i;
+}
+// Using i here would cause an error.
+A global variable is declared outside functions, usually near the top of the file. The uploaded code declares:
+int globalCount = 67;
+It can be accessed in main() and other functions after its declaration, subject to normal scope and visibility rules:
+cout << globalCount + 20;
+Output:
+87
+14. Pointers and Memory Addresses
+A pointer stores a memory address.
+int storeVal = 10;
+int *Address = &storeVal;
+- &storeVal obtains the address of storeVal.
+- int *Address declares a pointer to an integer.
+- Address contains the address.
+- *Address dereferences the pointer to access the value stored at that address.
+Example:
+cout << *Address;
+Output:
+10
+Printing Address itself displays an address representation, which varies between program runs and systems.
+15. Vectors
+A vector is a sequence container that can grow or shrink in size. The code includes <vector> and creates a vector of strings:
+vector<string> namelist;
+namelist.push_back("hi1");
+namelist.push_back("hi2");
+namelist.push_back("hi3");
+push_back() adds an element to the end of the vector.
+You can access elements by index:
+cout << namelist[0];  // hi1
+cout << namelist[1];  // hi2
+cout << namelist[2];  // hi3
+The valid indexes here are 0, 1, and 2. The loop in the uploaded code uses i <= 3, which attempts to access namelist[3], outside the valid range. Use i < namelist.size() instead:
+for (int i = 0; i < namelist.size(); i++)
+{
+    cout << namelist[i] << endl;
+}
+A vector can also report its number of elements using .size():
+cout << namelist.size();
+16. File Manipulation
+The code includes <fstream>, which provides file streams.
+16.1 Writing to a file
+ofstream file("GFG.txt");
+file << "Welcome to GeeksforGeeks.";
+file.close();
+- ofstream opens a file for output.
+- If the file does not exist, it is usually created.
+- Opening an existing file this way normally truncates its previous contents.
+- close() closes the file.
+The file path is interpreted relative to the program's working directory unless a path is supplied.
+16.2 Reading from a file
+ifstream fileread("tutorial.txt");
 
-Remember that both dimensions start from `0`.
+string fileline;
+while (getline(fileread, fileline))
+{
+    cout << fileline << endl;
+}
 
----
+fileread.close();
+ifstream opens a file for input. getline() reads one line at a time. Checking the result of getline() in the loop is safer than using while (!fileread.eof()), because the read can fail before the end-of-file flag is set.
+If the file cannot be opened, reading will fail, so check if (fileread.is_open()) or if (fileread) when you need to handle errors.
+16.3 Appending to a file
+Use ios::app to append content to the end of a file:
+ofstream file("GFG.txt", ios::app);
+file << endl << "新的一行" << endl;
+file.close();
+In the uploaded code, file.open("GFG.txt", ios::app); reuses the earlier ofstream file object after it was closed. That is valid.
+16.4 Writing binary data
+int binary_inp = 33;
 
-# Quick Summary
+ofstream fout("data.bin", ios::binary);
+fout.write((char *)&binary_inp, sizeof(binary_inp));
+fout.close();
+write() writes raw bytes from the memory address of binary_inp. sizeof(binary_inp) specifies how many bytes to write.
+16.5 Reading binary data
+int binary_out;
 
-| Concept          | Syntax / Example               |
-| ---------------- | ------------------------------ |
-| Output           | `cout << "Hello";`             |
-| New line         | `endl`                         |
-| Input            | `cin >> variable;`             |
-| Integer          | `int x = 10;`                  |
-| Decimal          | `double x = 3.14;`             |
-| Character        | `char x = 'A';`                |
-| String           | `string x = "Hello";`          |
-| Boolean          | `bool x = true;`               |
-| Assignment       | `x = 10;`                      |
-| Equal comparison | `x == 10`                      |
-| Not equal        | `x != 10`                      |
-| If statement     | `if (condition)`               |
-| Else             | `else`                         |
-| String length    | `str.length()`                 |
-| String character | `str[0]`                       |
-| Substring        | `str.substr(1, 3)`             |
-| For loop         | `for (...)`                    |
-| While loop       | `while (...)`                  |
-| Array            | `int arr[5];`                  |
-| Array element    | `arr[0]`                       |
-| Array size       | `sizeof(arr) / sizeof(arr[0])` |
-| 2D array         | `int arr[2][4];`               |
+ifstream fin("data.bin", ios::binary);
+fin.read((char *)&binary_out, sizeof(binary_out));
+cout << binary_out;
+fin.close();
+If the write and read both succeed on a compatible system, this outputs 33.
+Raw binary representations of integers can vary across systems due to differences such as byte order and integer representation. This example is suitable for demonstrating binary file operations within a compatible environment.
+Quick Summary
+Concept	Syntax / Example
+Output	cout << "Hello";
+New line	endl
+Input	cin >> variable;
+Integer	int x = 10;
+Decimal	double x = 3.14;
+Character	char x = 'A';
+String	string x = "Hello";
+Boolean	bool x = true;
+Assignment	x = 10;
+Add and assign	x += 1;
+Equality comparison	x == 10
+If statement	if (condition)
+String length	str.length()
+String character	str[0]
+Substring	str.substr(0, 3)
+For loop	for (int i = 0; i < n; i++)
+While loop	while (condition)
+Array	int arr[5];
+Array element	arr[0]
+Built-in array element count	sizeof(arr) / sizeof(arr[0])
+2D array	int arr[2][4];
+Function call	Squared(22)
+Local variable	Declared inside a function or block
+Global variable	Declared outside functions
+Pointer address	&variable
+Dereference pointer	*pointer
+Vector	vector<string> names;
+Add to vector	names.push_back("Alice");
+Vector size	names.size()
+Write file	ofstream file("name.txt");
+Read file	ifstream file("name.txt");
+Append to file	ofstream file("name.txt", ios::app);
 
----
 
-# Basic Example Combining Everything
-
-```cpp
+Basic Example Combining Several Concepts
 #include <iostream>
+#include <string>
 using namespace std;
 
 int main()
@@ -870,17 +441,5 @@ int main()
 
     return 0;
 }
-```
-
-This small program combines:
-
-* Variables
-* `string`
-* `int`
-* `cin`
-* `cout`
-* Comparisons
-* `if-else`
-* `endl`
-
-These are the basic building blocks you will use throughout beginner C++ programming.
+This example combines variables, string, int, cin, cout, comparisons, and if-else. Note that cin >> name reads only up to the next whitespace, so a full name containing spaces would need a different input approach.
+These notes now cover the topics actually introduced in tutorial.cpp: console input/output, variables, comparisons, strings, characters and ASCII, loops, arrays, functions, variable scope, pointers, vectors, and text and binary file operations.
