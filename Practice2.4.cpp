@@ -9,7 +9,7 @@ int main()
         bool F = (killer == 'F');
 
         bool B = (killer == 'A') || (killer == 'C');
-        bool C = !A && !F;
+        bool C = !A && !B;
         bool D = !C && !F;
         bool E = A && D && !B && !C && !F;
 
