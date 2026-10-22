@@ -388,6 +388,8 @@ The last valid index is:
 array size - 1
 ```
 
+For example, `string cars[4]` has **4 elements**, with indexes `0`, `1`, `2`, and `3`. Therefore, its last valid index is `4 - 1 = 3`. The array size counts how many elements exist, while the index counts from `0`. Accessing `cars[4]` is out of bounds and causes undefined behavior in C++.
+
 ## 9.2 Initialising an array directly
 
 ```cpp
@@ -421,6 +423,19 @@ cout << cars[0];
 ```
 
 Array elements can be changed after declaration.
+
+## 9.5 Filling memory with `memset()`
+
+The code includes `<cstring>` to use `memset()`:
+
+```cpp
+char charA[10] = {'B', 'e', 'i', 'J', 'i', 'n', 'g'};
+memset(charA, 'k', sizeof(charA));
+```
+
+`memset(destination, value, numberOfBytes)` fills the specified number of bytes with the given byte value. Here, every byte in `charA` is set to the byte representation of `'k'`, so the array no longer contains `"BeiJing"`.
+
+Use `memset()` carefully. It works byte by byte, so it is most straightforward for character buffers and setting memory to zero. It is generally not the right way to assign an arbitrary nonzero integer value to every element of an integer array.
 
 ---
 
@@ -628,9 +643,82 @@ Output:
 
 Printing `Address` itself displays an address representation, which varies between program runs and systems.
 
+## 14.1 Using a pointer to change a variable inside a function
+
+The code defines this function:
+
+```cpp
+void changeValue(int *p)
+{
+    *p = 32;
+}
+```
+
+It can be called like this:
+
+```cpp
+int p = 0;
+changeValue(&p);
+cout << p;  // 32
+```
+
+Step by step:
+
+1. `&p` passes the memory address of the variable `p`.
+2. The function parameter `int *p` receives that address.
+3. `*p = 32` follows the address and changes the original variable's value.
+4. When the function returns, the original variable has the value `32`.
+
+The pointer parameter lets the function modify the caller's variable. The local parameter named `p` inside the function is separate from the variable named `p` in `main()`, even though they have the same name.
+
 ---
 
-# 15. Vectors
+# 15. Structures (`struct`)
+
+A **structure** groups related variables, potentially of different data types, under one custom type. Use `struct` when several pieces of information belong together.
+
+```cpp
+struct Student
+{
+    string name;
+    int age;
+    double grade;
+};
+```
+
+This defines a new type called `Student` with three members: `name`, `age`, and `grade`. The semicolon after the closing brace is required.
+
+## 15.1 Creating and using a structure variable
+
+```cpp
+Student student1;
+student1.name = "Alex";
+student1.age = 18;
+student1.grade = 87.5;
+
+cout << student1.name << endl;
+cout << student1.age << endl;
+cout << student1.grade << endl;
+```
+
+Use the dot operator (`.`) to access or change a member of a structure variable.
+
+## 15.2 Initialising a structure when declaring it
+
+You can also provide the member values when creating the variable:
+
+```cpp
+Student student2 = {"Jamie", 19, 91.0};
+cout << student2.name;
+```
+
+The values are assigned in the order the members are declared: `name`, then `age`, then `grade`.
+
+A structure definition creates a type. It does not, by itself, create a student variable. You create variables such as `student1` or `student2` using that type.
+
+---
+
+# 16. Vectors
 
 A `vector` is a sequence container that can grow or shrink in size. The code includes `<vector>` and creates a vector of strings:
 
@@ -666,13 +754,52 @@ A `vector` can also report its number of elements using `.size()`:
 cout << namelist.size();
 ```
 
+## 16.1 Removing the last element with `pop_back()`
+
+```cpp
+namelist.pop_back();
+```
+
+`pop_back()` removes the final element. In the example, the vector initially contains `"hi1"`, `"hi2"`, and `"hi3"`. After `pop_back()`, it contains only `"hi1"` and `"hi2"`.
+
+Do not call `pop_back()` on an empty vector.
+
+## 16.2 Iterators and common algorithms
+
+The code includes `<algorithm>`, which provides algorithms such as `sort()`, `min_element()`, and `max_element()`.
+
+For a vector of numbers:
+
+```cpp
+vector<int> numbers = {5, 2, 8, 1};
+
+sort(numbers.begin(), numbers.end());
+
+cout << numbers[0];  // 1
+```
+
+- `begin()` refers to the first element.
+- `end()` refers to the position just after the last element. It is used as the end boundary and should not be dereferenced.
+- `sort(numbers.begin(), numbers.end())` sorts the elements in ascending order.
+- `min_element(numbers.begin(), numbers.end())` returns an iterator to the smallest element.
+- `max_element(numbers.begin(), numbers.end())` returns an iterator to the largest element.
+
+To print the minimum or maximum value, dereference the iterator:
+
+```cpp
+cout << *min_element(numbers.begin(), numbers.end());
+cout << *max_element(numbers.begin(), numbers.end());
+```
+
+These algorithms compare the elements, so the element type must support the required comparison. For an empty vector, do not dereference the result of `min_element()` or `max_element()`.
+
 ---
 
-# 16. File Manipulation
+# 17. File Manipulation
 
 The code includes `<fstream>`, which provides file streams.
 
-## 16.1 Writing to a file
+## 17.1 Writing to a file
 
 ```cpp
 ofstream file("GFG.txt");
@@ -687,7 +814,7 @@ file.close();
 
 The file path is interpreted relative to the program's working directory unless a path is supplied.
 
-## 16.2 Reading from a file
+## 17.2 Reading from a file
 
 ```cpp
 ifstream fileread("tutorial.txt");
@@ -705,7 +832,7 @@ fileread.close();
 
 If the file cannot be opened, reading will fail, so check `if (fileread.is_open())` or `if (fileread)` when you need to handle errors.
 
-## 16.3 Appending to a file
+## 17.3 Appending to a file
 
 Use `ios::app` to append content to the end of a file:
 
@@ -717,7 +844,7 @@ file.close();
 
 In the uploaded code, `file.open("GFG.txt", ios::app);` reuses the earlier `ofstream file` object after it was closed. That is valid.
 
-## 16.4 Writing binary data
+## 17.4 Writing binary data
 
 ```cpp
 int binary_inp = 33;
@@ -729,7 +856,7 @@ fout.close();
 
 `write()` writes raw bytes from the memory address of `binary_inp`. `sizeof(binary_inp)` specifies how many bytes to write.
 
-## 16.5 Reading binary data
+## 17.5 Reading binary data
 
 ```cpp
 int binary_out;
@@ -776,6 +903,8 @@ Raw binary representations of integers can vary across systems due to difference
 | Global variable | Declared outside functions |
 | Pointer address | `&variable` |
 | Dereference pointer | `*pointer` |
+| Structure | `struct Student { string name; int age; };` |
+| Structure member | `student.name` |
 | Vector | `vector<string> names;` |
 | Add to vector | `names.push_back("Alice");` |
 | Vector size | `names.size()` |
@@ -820,4 +949,4 @@ This example combines variables, `string`, `int`, `cin`, `cout`, comparisons, an
 
 ---
 
-These notes now cover the topics actually introduced in `tutorial.cpp`: console input/output, variables, comparisons, strings, characters and ASCII, loops, arrays, functions, variable scope, pointers, vectors, and text and binary file operations.
+These notes cover the topics introduced in `tutorial.cpp`: console input/output, variables, comparisons, strings, characters and ASCII, loops, arrays, `memset()`, functions, variable scope, pointers and pointer-based modification, vectors and common algorithms, and text and binary file operations.
