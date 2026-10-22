@@ -2,6 +2,8 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <cstring>
+#include <algorithm>
 using namespace std; // VERY IMPORTANT
 
 void returnUserName(string userName)
@@ -26,8 +28,13 @@ string First3Letter(string userName)
     return userName.substr(0, 3);
 }
 
-// a variable is only globla if you declare like this
+// a variable is only global if you declare like this
 int globalCount = 67;
+
+void changeValue(int *p)
+{
+    *p = 32;
+}
 
 int main()
 {
@@ -166,6 +173,8 @@ int main()
     // VALUES OF ARRAY CAN BE CHANGED
     cars[0] = "carr";
 
+    memset(charA, 'k', sizeof(charA));
+
     // you can get the length of array also using sizeof()
     // PLEASE NOTE THAT THE VALUE WILL BE IN BITS, SO YOU MUST DIVIDE BY sizeof(ONE ELEMENT)
     // cout << sizeof(cars)/sizeof(cars[0]);
@@ -210,6 +219,11 @@ int main()
     // you can also get the value stored in the address by adding "*"
     // cout << *Address;
 
+    // application of pointer: can be used to manipulate variable outside of a function
+    int p = 0;
+    changeValue(&p);
+    // cout << p;
+
     // concept 11: vector
     // vector is like array, except its size is changable
     // remember to include <vector>
@@ -222,6 +236,16 @@ int main()
     {
         // cout << namelist[i] << "hi";
     }
+
+    namelist.pop_back();
+    // cout << namelist;
+
+    // vector comes with many built in function
+    // cout << namelist.begin()
+    // cout << namelist.end()
+    // sort()
+    // min_element(namelist.begin(). namelist.end());
+    // max_element(namelist.begin(). namelist.end());
 
     // concept 12: file manipulation
     // remember to put #include <fstream> on top
@@ -250,7 +274,7 @@ int main()
 
     file.open("GFG.txt", ios::app);
     file << endl
-         << "新的一行" << endl;
+         << "new line" << endl;
 
     file.close();
 
